@@ -72,7 +72,9 @@ export const bannedConsonantPairs = [
   "šþ", // þ combinations
   "þþ", // doubled þ
   "tp",
-  "qs"
+  "qs",
+  "gk",
+  "gp"
   // We can add more as we discover them
 ];
 
@@ -109,6 +111,7 @@ export const bannedVowelPairs = [
   "âa",
   "iy", // Other problematic pairs
   "âu",
-  "eo"
+  "eo",
+  "ææ"
   // Add other vowel combinations we want to prevent
 ];

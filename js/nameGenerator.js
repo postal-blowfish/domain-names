@@ -1,7 +1,6 @@
 // nameGenerator.js
 import {
   vowelWeights,
-  consonantWeights,
   prefixRules,
   suffixRules,
   bannedConsonantPairs,
@@ -13,7 +12,7 @@ import {
   getValidWeightedConsonants,
   isVowel,
   isConsonant,
-  isValidConsonantPair,
+ // isValidConsonantPair,
 } from "./utils.js";
 
 function generateSyllable(isFinal = false) {
@@ -36,7 +35,7 @@ function generateSyllable(isFinal = false) {
     syllable += vowel;
     
     if (useSuffix && suffixRules[vowel]) {
-        const validSuffixWeights = getValidWeightedConsonants(vowel, suffixRules, 'suffix');
+        const validSuffixWeights = getValidWeightedConsonants(vowel, suffixRules);
         syllable += weightedRandom(validSuffixWeights);
     }
     
@@ -46,13 +45,13 @@ function generateSyllable(isFinal = false) {
 export function generateName() {
   const rand = Math.random();
   let numSyllables;
-  if (rand < 0.25) numSyllables = 1;
-  else if (rand < 0.75) numSyllables = 2;
-  else if (rand < 0.95) numSyllables = 3;
+  if (rand < 0.20) numSyllables = 1;
+  else if (rand < 0.80) numSyllables = 2;
+  else if (rand < 0.98) numSyllables = 3;
   else numSyllables = 4;
 
   let syllables;
-  let name;
+  let name = "";
   let attempts = 0;
   
   do {
@@ -72,39 +71,13 @@ export function generateName() {
       name = handleRepeatedConsonants(name);
       
       attempts++;
-      if (attempts > 100) {
+      if (attempts > 1000) {
           name = generateSyllable(true);
           break;
       }
   } while (name.length < 3 || !areSequencesValid(name));
   
   return name.charAt(0).toUpperCase() + name.slice(1);
-}
-
-function checkSameCVC(syllable) {
-  if (
-    syllable.length === 3 &&
-    isConsonant(syllable[0]) &&
-    isVowel(syllable[1]) &&
-    isConsonant(syllable[2]) &&
-    syllable[0] === syllable[2]
-  ) {
-    if (Math.random() < 0.9) {
-      // Get valid suffix consonants for this vowel
-      const validSuffixes = suffixRules[syllable[1]];
-      // Filter out the current consonant
-      const possibleConsonants = validSuffixes.filter((c) => c !== syllable[2]);
-      if (possibleConsonants.length > 0) {
-        return (
-          syllable.slice(0, 2) +
-          possibleConsonants[
-            Math.floor(Math.random() * possibleConsonants.length)
-          ]
-        );
-      }
-    }
-  }
-  return syllable;
 }
 
 // Within generateName, after creating the full name:

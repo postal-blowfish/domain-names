@@ -1,10 +1,9 @@
+/* styles.css */
 :root {
-	--font-title: "Pirata One", serif;
-	--font-fancy: "Aubrey", serif;
-	--font-sans: "Quattrocento Sans", sans-serif;
-  /*--font-title: Arial, sans-serif;
-  --font-fancy: Arial, sans-serif;
-  --font-sans: Arial, sans-serif;;*/
+  --font-title: "Pirata One", serif;
+  --font-fancy: "Aubrey", serif;
+  --font-sans: "Quattrocento Sans", sans-serif;
+  --width: 800px;
 }
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -16,14 +15,14 @@
     align-items: center;
   }
 }
+
 body {
   font-family: var(--font-sans);
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
+  max-width: var(--width);
   margin: 1.5em auto;
-  padding: 1.5em;
   background-color: #202020;
 }
 
@@ -34,41 +33,60 @@ h1 {
   font-style: normal;
   text-align: center;
   font-size: 3em;
-  color: slategray;
   margin-bottom: 1em;
+  
+  color: #a0a0a0;
+  
+  /* Dramatic 3D effect */
+  text-shadow: 
+    /* Glow layers */ 
+    0 0 20px rgba(228, 221, 130, 0.5), 
+    0 0 40px rgba(176, 196, 222, 0.7), 
+    /* Highlight layer */ 
+    1px 1px 0 #d0d0d0,
+    /* Main depth layers */ 
+    2px 2px 0 #a0a0a0, 
+    3px 3px 0 #808080,
+    4px 4px 0 #404040, 
+    /* Deep shadow */ 
+    5px 5px 0 #202020,
+    6px 6px 2px rgba(0, 0, 0, 0.3),
+    /* Ambient occlusion simulation */ 
+    7px 7px 5px rgba(0, 0, 0, 0.2),
+    8px 8px 10px rgba(0, 0, 0, 0.1);
+
+  animation: stoneGlow 20s ease-in-out infinite;
 }
+
 .overall-container {
   display: flex;
   flex-direction: column; /* Stack elements vertically */
   align-items: flex-start; /* Align items to the left */
-  width: 800px; /* Set the static width you want */
   margin: 0 auto; /* Center the container horizontally */
-}
-.output {
-  margin: 1em 0;
-  padding: 1em;
-  border: 1px solid dimgrey;
-  border-radius: 0.5em;
-  background-color: #606060;
-  color: lightgoldenrodyellow;
-  min-height: 200px;
-  min-width: 300px;
-  flex: 1;
-  font-size: 18px;
-  min-height: 31.6em; 
-  transition: min-height 0.3s ease; 
 }
 .button-container {
   display: flex;
+  gap: 1em;
   justify-content: center;
-  gap: 0.5em;
-  width: 90%;
-  max-width: 1200px;
-  margin-bottom: 0.5em;
+  width: 100%;
 }
-button, .collapsible {
-  margin: 0.5em;
-  padding: 0.5em 1em;
+.content-container {
+  display: flex;
+  gap: 1em;
+  align-items: flex-start; /* Align to the top */
+}
+.main-container {
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-sans);
+  min-height: 0;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+}
+
+button,
+.collapsible {
   font-family: var(--font-fancy);
   font-size: 24px;
   background-color: slategray;
@@ -76,37 +94,48 @@ button, .collapsible {
   border: none;
   border-radius: 0.25em;
   cursor: pointer;
-  min-width: 200px; /* Match button width */
+  width: 250px;
+  height: 2em;
   text-align: center; /* Text center alignment */
 }
-.collapsible:hover, button:hover {
+.collapsible:hover,
+button:hover {
   background-color: steelblue;
 }
 
+.guide,
+.output {
+  flex: 1 1 0; /* grow | shrink | basis */
+  flex-direction: column;
+  justify-content: center;
+  min-width: 300px;
+  width: 100%; /* ensure both take full width of their container */
+  padding: 1em;
+}
+.output {
+  border: 1px solid dimgrey;
+  border-radius: 0.5em;
+  background-color: #606060;
+  color: lightgoldenrodyellow;
+  min-height: 200px;
+  font-size: 18px;
+}
 .guide {
   background-color: slategray;
-  padding: 1em;
   border-radius: 0.5em;
-  margin: 1em 0;
   border: 1px solid dimgrey;
-  flex: 1; /* Takes less space than output */
-  min-width: 300px;
   font-family: var(--font-sans);
   display: none; /* Hidden by default */
-  min-height: 34em; 
 }
 .guide h2 {
   margin-top: 0;
   color: lightgoldenrodyellow;
   font-family: var(--font-title);
   font-size: 24px;
-  margin-bottom: 0.5em;
+  /*margin-bottom: 0.25em;*/
 }
 .guide.active {
   display: block;
-}
-.guide-section {
-  margin: 1em 0;
 }
 .guide h3,
 .guide-section h3 {
@@ -114,12 +143,12 @@ button, .collapsible {
   font-family: var(--font-fancy);
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.25em;
 }
 .pronunciation-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0.5em 0;
 }
 .pronunciation-table td,
 .pronunciation-table th {
@@ -137,46 +166,19 @@ button, .collapsible {
 .active {
   background-color: slategray;
 }
-.content {
-  display: none;
-  overflow: hidden;
-}
-
-.content-container {
-  display: flex;
-  gap: 1em;
-  align-items: flex-start; /* Align to the top */
-}
-
-.main-container {
-  display: flex;
-  justify-content: center;
-  font-family: var(--font-sans);
-  align-items: flex-start;
-  gap: 16px;
-  width: 90%;
-  max-width: 1200px;
-}
-
-.output, .guide {
-  width: 100%; /* Ensure content takes full width */
-  margin-top: 10px; /* Space above content */
-}
 
 .name {
   margin: 0.25em 0;
   font-family: var(--font-fancy);
   font-size: 20px;
-  padding: 0.25em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
   cursor: pointer;
-  /*display: inline-block; /* Ensure they behave like inline elements */
 }
-
 .name:hover {
   background-color: #707070;
   position: relative;
 }
-
 .name:hover::after {
   content: attr(title); /* Display the title as tooltip */
   position: absolute;
