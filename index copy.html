@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Domain Fantasy Name Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Aubrey&family=Exo:ital,wght@0,100..900;1,100..900&family=Grenze+Gotisch:wght@100..900&family=MedievalSharp&family=Pirata+One&family=Quattrocento+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Quicksand:wght@300..700&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <h1>Domain Fantasy Name Generator</h1>
+    <button onclick="window.generateNames()">Generate Names</button>
+    <div class="output" id="nameOutput"></div>
+
+    <button type="button" class="collapsible">Show Pronunciation Guide</button>
+    <div class="guide content">
+      <h2>Pronunciation Guide</h2>
+
+      <div class="guide-section">
+        <h3>Special Vowels</h3>
+        <table class="pronunciation-table">
+          <tr>
+            <th>Letter</th>
+            <th>Pronunciation</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>â</td>
+            <td>Long 'a'</td>
+            <td>as in "father"</td>
+          </tr>
+          <tr>
+            <td>æ</td>
+            <td>Long 'a'</td>
+            <td>as in "face"</td>
+          </tr>
+          <tr>
+            <td>å</td>
+            <td>Long 'o'</td>
+            <td>as in "more"</td>
+          </tr>
+          <tr>
+            <td>ø</td>
+            <td>Rounded 'e'</td>
+            <td>as in "burn"</td>
+          </tr>
+          <tr>
+            <td>ö</td>
+            <td>Rounded 'e'</td>
+            <td>as in German "schön"</td>
+          </tr>
+          <tr>
+            <td>û</td>
+            <td>Long 'oo'</td>
+            <td>as in "boot"</td>
+          </tr>
+          <tr>
+            <td>ü</td>
+            <td>Rounded 'ee'</td>
+            <td>as in French "tu"</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="guide-section">
+        <h3>Special Consonants</h3>
+        <table class="pronunciation-table">
+          <tr>
+            <th>Letter</th>
+            <th>Pronunciation</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>þ</td>
+            <td>'th'</td>
+            <td>as in "thin"</td>
+          </tr>
+          <tr>
+            <td>š</td>
+            <td>'sh'</td>
+            <td>as in "ship"</td>
+          </tr>
+          <tr>
+            <td>q</td>
+            <td>'ch'</td>
+            <td>as in "church"</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Collapsible section functionality
+      var coll = document.getElementsByClassName("collapsible");
+      for (var i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.display === "block") {
+            content.style.display = "none";
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+    </script>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
